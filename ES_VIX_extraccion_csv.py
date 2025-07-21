@@ -20,6 +20,8 @@ try:
     "S&P 500")
     
     
+    
+    
     vix_df = procesar_datos_yfinance(
     yf.download('^VIX',start=fecha_inicio, end=fecha_fin, progress=False),
     'VIX')
@@ -27,6 +29,9 @@ try:
 
 except:
     print("Algo salio mal al crear los data frame")
+
+vix_df['vix_avg_hl'] = (vix_df['high'] + vix_df['low']) / 2
+sp500_df['sp_pct_move'] = (sp500_df['high'] - sp500_df['low']) / sp500_df['open'] * 100
    
 try:
     
@@ -37,3 +42,4 @@ try:
     print("Se exporto con exito el csv")
 except:
     print("No se pudo exportar el data_frame a un archivo csv")
+    
